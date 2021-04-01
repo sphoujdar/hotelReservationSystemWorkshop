@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.BridgeLabz'
-version '1.0-SNAPSH
+version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
