@@ -17,6 +17,30 @@ public class Hotel {
         this.rate = rate;
     }
 
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public Integer getHotelRating() {
+        return hotelRating;
+    }
+
+    public void setHotelRating(Integer hotelRating) {
+        this.hotelRating = hotelRating;
+    }
+
+    public HashMap<CustomerType, RateKey> getRate() {
+        return rate;
+    }
+
+    public void setRate(HashMap<CustomerType, RateKey> rate) {
+        this.rate = rate;
+    }
+
     public Integer getRateForADateRange(CustomerType customerType, LocalDate startDate , LocalDate endDate){
         return    Stream.iterate(startDate, date -> date.plusDays(1))
                         .limit(ChronoUnit.DAYS.between(startDate, endDate) + 1)
