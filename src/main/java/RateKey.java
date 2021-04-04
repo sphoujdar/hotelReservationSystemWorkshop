@@ -15,12 +15,12 @@ public class RateKey {
         this.weekdayRates = weekdayRates;
     }
 
-    public int getWeekendRates() {
-        return weekendRates;
+    public Integer getWeekendRates() {
+        return this.weekendRates;
     }
 
-    public int getWeekdayRates() {
-        return weekdayRates;
+    public Integer getWeekdayRates() {
+        return this.weekdayRates;
     }
 
     @Override

@@ -3,6 +3,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class HotelReservationSystemTest {
@@ -43,5 +45,22 @@ public class HotelReservationSystemTest {
                                && runnerObject.getHotelByName("Lakewood").rate.get(CustomerType.REGULAR).getWeekendRates() == 90
                                && runnerObject.getHotelByName("Lakewood").rate.get(CustomerType.REWARD).getWeekendRates() == 80;
         Assert.assertTrue(testVariable);
+    }
+
+    @Test
+    public void givenInputOfHotelDetailsAndDateRange_GetCheapestRate_ReturnTrueIfCheapestRateIsReturned(){
+        String startDate = "03Apr2021";
+        String endDate = "04Apr2021";
+
+        Result cheapestRateRegular = runnerObject.showCheapestThreeRateForADateRangeReturnCheapest(CustomerType.REGULAR ,
+                     LocalDate.parse( startDate, DateTimeFormatter.ofPattern("ddMMMyyyy")),
+                     LocalDate.parse( endDate, DateTimeFormatter.ofPattern("ddMMMyyyy")));
+
+        Result cheapestRateReward = runnerObject.showCheapestThreeRateForADateRangeReturnCheapest(CustomerType.REWARD ,
+                LocalDate.parse(startDate, DateTimeFormatter.ofPattern("ddMMMyyyy")),
+                LocalDate.parse(endDate, DateTimeFormatter.ofPattern("ddMMMyyyy")));
+
+        Assert.assertEquals(120 , (int) cheapestRateRegular.getTotalCalculatedRate());
+        Assert.assertEquals(80 , (int) cheapestRateReward.getTotalCalculatedRate());
     }
 }
