@@ -7,6 +7,14 @@ public class RateKey {
         this.weekdayRates = weekDayRates;
     }
 
+    public void setWeekendRates(Integer weekendRates) {
+        this.weekendRates = weekendRates;
+    }
+
+    public void setWeekdayRates(Integer weekdayRates) {
+        this.weekdayRates = weekdayRates;
+    }
+
     public int getWeekendRates() {
         return weekendRates;
     }
