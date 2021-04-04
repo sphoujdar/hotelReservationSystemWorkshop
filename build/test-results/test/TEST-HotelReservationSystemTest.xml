@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="HotelReservationSystemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-04-01T03:54:28" hostname="phoujdar" time="0.019">
+  <properties/>
+  <testcase name="givenInputOfHotelDetails_AddHotelToHotelReservationSystem_ReturnTrueIfInfoCorrectlyAdded()" classname="HotelReservationSystemTest" time="0.019"/>
+  <system-out><![CDATA[true
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
