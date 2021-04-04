@@ -1,6 +1,7 @@
 //https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaEnum.html
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class HotelReservationSystem {
@@ -25,14 +26,25 @@ public class HotelReservationSystem {
         return null;
     }
 
-    public Result showCheapestThreeRateForADateRangeReturnCheapest(CustomerType customerType, LocalDate startDate , LocalDate endDate){
+    public Result getCheapestRateForADateRange(CustomerType customerType, LocalDate startDate , LocalDate endDate){
         ArrayList<Result> allHotelRateList= this.getAllRateForADateRange(customerType,startDate,endDate);
         //System.out.println("You are eligible for " + customerType + " Rates.");
         ArrayList<Result> cheapest3HotelRateList= (ArrayList<Result>) allHotelRateList.stream()
-                                                                                 //.sorted((resultOne,resultTwo) -> resultOne.getTotalCalculatedRate() - resultTwo.getTotalCalculatedRate())
-                                                                                 .sorted(new ResultComparator())
+                                                                                 .sorted(Comparator.comparingInt(Result::getTotalCalculatedRate))
+                                                                                 //.sorted(new ResultComparator())
                                                                                  .limit(3)
                                                                                  .collect(Collectors.toList());
+        //System.out.println(cheapest3HotelRateList);
+        return cheapest3HotelRateList.get(0);
+    }
+
+    public Result getBestRatedHotelForADateRange(CustomerType customerType, LocalDate startDate , LocalDate endDate){
+        ArrayList<Result> allHotelRateList= this.getAllRateForADateRange(customerType,startDate,endDate);
+        //System.out.println("You are eligible for " + customerType + " Rates.");
+        ArrayList<Result> cheapest3HotelRateList= (ArrayList<Result>) allHotelRateList.stream()
+                .sorted(Comparator.comparingInt(Result::getHotelRating).reversed())
+                .limit(3)
+                .collect(Collectors.toList());
         //System.out.println(cheapest3HotelRateList);
         return cheapest3HotelRateList.get(0);
     }
