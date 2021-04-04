@@ -36,19 +36,6 @@ public class HotelReservationSystemTest {
         runnerObject.addHotel(lakewood);
         runnerObject.addHotel(bridgewood);
         runnerObject.addHotel(ridgewood);
-
-//        hotelRateVariable = new HashMap<>();
-//        hotelRateVariable.put(CustomerType.REGULAR , new RateKey(30, 30));
-//        hotelRateVariable.put(CustomerType.REWARD , new RateKey(25, 25));
-//        creekwood = new Hotel("creekwood", 1, hotelRateVariable);
-//
-//        hotelRateVariable = new HashMap<>();
-//        hotelRateVariable.put(CustomerType.REGULAR , new RateKey(30, 30));
-//        hotelRateVariable.put(CustomerType.REWARD , new RateKey(25, 25));
-//        valleywood = new Hotel("valleywood", 2, hotelRateVariable);
-//
-//        runnerObject.addHotel(creekwood);
-//        runnerObject.addHotel(valleywood);
     }
 
     @Test
@@ -103,21 +90,50 @@ public class HotelReservationSystemTest {
         //OP is wrong in pdf file
     }
 
-//    @Test
-//    public void givenInputOfHotelDetailsAndDateRange_GetCheapestRate_ReturnTrueIfCheapestRateIsReturned(){
-//        String startDate = "03Apr2021";
-//        String endDate = "04Apr2021";
-//
-//        Result cheapestRateRegular = runnerObject.showCheapestThreeRateForADateRangeReturnCheapest(CustomerType.REGULAR,
-//                     LocalDate.parse( startDate, DateTimeFormatter.ofPattern("ddMMMyyyy")),
-//                     LocalDate.parse( endDate, DateTimeFormatter.ofPattern("ddMMMyyyy")));
-//
-//        Result cheapestRateReward = runnerObject.showCheapestThreeRateForADateRangeReturnCheapest(CustomerType.REWARD,
-//                LocalDate.parse(startDate, DateTimeFormatter.ofPattern("ddMMMyyyy")),
-//                LocalDate.parse(endDate, DateTimeFormatter.ofPattern("ddMMMyyyy")));
-//
-//        Assert.assertEquals(60 , (int) cheapestRateRegular.getTotalCalculatedRate());
-//        Assert.assertEquals(2 , (int) cheapestRateRegular.getHotelRating());
-//        Assert.assertEquals("valleywood" , cheapestRateRegular.getHotelName());
-//    }
+    @Test
+    public void givenDateRange_GetBestRatedHotelForRewardsCustomer_ReturnTrueIfCorrectlyReturned(){
+        String startDate = "11Sep2020";
+        String endDate = "12Sep2020";
+
+        Result cheapestRateReward = runnerObject.getCheapestRateForADateRange(CustomerType.REWARD,
+                LocalDate.parse(startDate, DateTimeFormatter.ofPattern("ddMMMyyyy")),
+                LocalDate.parse(endDate, DateTimeFormatter.ofPattern("ddMMMyyyy")));
+
+        Assert.assertEquals(140 , (int) cheapestRateReward.getTotalCalculatedRate());
+        Assert.assertEquals("Ridgewood" , cheapestRateReward.getHotelName());
+    }
+
+    @Test
+    public void givenInputOfHotelDetailsAndDateRange_GetCheapestThenBestRated_ReturnTrueIfCheapestRateIsReturned(){
+        HashMap<CustomerType, RateKey> hotelRateVariable = new HashMap<>();
+        hotelRateVariable = new HashMap<>();
+        hotelRateVariable.put(CustomerType.REGULAR , new RateKey(30, 30));
+        hotelRateVariable.put(CustomerType.REWARD , new RateKey(25, 25));
+        creekwood = new Hotel("Creekwood", 1, hotelRateVariable);
+
+        hotelRateVariable = new HashMap<>();
+        hotelRateVariable.put(CustomerType.REGULAR , new RateKey(30, 30));
+        hotelRateVariable.put(CustomerType.REWARD , new RateKey(25, 25));
+        valleywood = new Hotel("Valleywood", 2, hotelRateVariable);
+
+        runnerObject.addHotel(creekwood);
+        runnerObject.addHotel(valleywood);
+
+        String startDate = "03Apr2021";
+        String endDate = "04Apr2021";
+
+        Result cheapestRateRegular = runnerObject.getCheapestRateForADateRange(CustomerType.REGULAR,
+                     LocalDate.parse( startDate, DateTimeFormatter.ofPattern("ddMMMyyyy")),
+                     LocalDate.parse( endDate, DateTimeFormatter.ofPattern("ddMMMyyyy")));
+
+        Result cheapestRateReward = runnerObject.getCheapestRateForADateRange(CustomerType.REWARD,
+                LocalDate.parse(startDate, DateTimeFormatter.ofPattern("ddMMMyyyy")),
+                LocalDate.parse(endDate, DateTimeFormatter.ofPattern("ddMMMyyyy")));
+
+        Assert.assertEquals(60 , (int) cheapestRateRegular.getTotalCalculatedRate());
+        Assert.assertEquals(2 , (int) cheapestRateRegular.getHotelRating());
+        Assert.assertEquals("Valleywood" , cheapestRateRegular.getHotelName());
+    }
+
+    //How to use multiple comparator object to compare in .sorted() method?
 }

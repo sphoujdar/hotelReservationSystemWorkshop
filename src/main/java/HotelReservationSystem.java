@@ -30,8 +30,8 @@ public class HotelReservationSystem {
         ArrayList<Result> allHotelRateList= this.getAllRateForADateRange(customerType,startDate,endDate);
         //System.out.println("You are eligible for " + customerType + " Rates.");
         ArrayList<Result> cheapest3HotelRateList= (ArrayList<Result>) allHotelRateList.stream()
-                                                                                 .sorted(Comparator.comparingInt(Result::getTotalCalculatedRate))
-                                                                                 //.sorted(new ResultComparator())
+                                                                                 //.sorted(Comparator.comparingInt(Result::getTotalCalculatedRate))
+                                                                                 .sorted(new ResultComparator())
                                                                                  .limit(3)
                                                                                  .collect(Collectors.toList());
         //System.out.println(cheapest3HotelRateList);
